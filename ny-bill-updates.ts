@@ -1,9 +1,11 @@
+interface BillId {
+  basePrintNo: string;
+  session: number;
+  basePrintNoStr: string;
+}
+
 interface BillUpdateToken {
-  id: {
-    basePrintNo: string;
-    session: number;
-    basePrintNoStr: string;
-  };
+  id: BillId;
   contentType: string;
   sourceId: string;
   sourceDateTime: string;
