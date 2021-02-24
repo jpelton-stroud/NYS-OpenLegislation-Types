@@ -1,20 +1,20 @@
 interface Response {
-  success: boolean;
-  message: string;
-  responseType: string;
+    success: boolean
+    message: string
+    responseType: string
 }
 
 interface ItemResponse extends Response {
-  result: {};
+    result: {}
 }
 
 interface ListResponse extends Response {
-  total: number;
-  offsetStart: number;
-  offsetEnd: number;
-  limit: number;
-  result: {
-    items: [];
-    size: number;
-  };
+    total: number
+    offsetStart: number
+    offsetEnd: number
+    limit: number
+    result: {
+        items: []
+        size: number
+    }
 }
