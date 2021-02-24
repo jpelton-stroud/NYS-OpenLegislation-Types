@@ -11,22 +11,22 @@ interface Person {
   personId: number;
   fullName: string;
   firstName: string;
-  middleName: string | null;
+  middleName: string;
   lastName: string;
-  email: string | null;
+  email: string;
   prefix: string;
-  suffix: string | null;
+  suffix: string;
   verified: boolean;
-  imgName: string | null;
+  imgName: string;
 }
 
 interface Member extends SessionMember {
-    chamber: "ASSEMBLY" | "SENATE";
-    incumbent: boolean;
-    fullName: string;
-    imgName: string | null;
-    sessionShortNameMap: { 
-        [key:string]: SessionMember[];
-    },
-    person: Person;
+  chamber: "ASSEMBLY" | "SENATE";
+  incumbent: boolean;
+  fullName: string;
+  imgName: string;
+  person: Person;
+  sessionShortNameMap: {
+    [key: string]: SessionMember[];
+  };
 }
