@@ -1,5 +1,6 @@
-import { Items, ChamberType, BillVersion } from "./shared"
-import { Member } from "./members"
+import { Items, ChamberType, BillVersion } from "../shared/shared"
+import { Member } from "../members/members"
+import { AgendaId } from "../agendas/agendas"
 
 export interface BillInfo {
     basePrintNo: string
@@ -48,7 +49,6 @@ export interface Bill extends BillInfo {
 
 export type MemberVotes = Record<VoteCodes, Items<Member[]>>
 export type VoteCodes = "AYE" | "NAY" | "AYEWR" | "EXC"
-export type CalendarId = Record<"agendaId" | "calendarNumber", number>
 
 export type PublishStatusMap = Record<
     BillVersion,
@@ -70,10 +70,6 @@ export interface Votes {
     voteDate: Date
     committee: CommitteeId
     memberVotes: Items<MemberVotes>
-}
-export interface AgendaId {
-    number: number
-    year: number
 }
 
 export interface CommitteeId {

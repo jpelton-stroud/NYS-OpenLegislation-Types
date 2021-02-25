@@ -1,4 +1,4 @@
-import { AgendaId, CalendarId, BillId } from "./bills"
+import { AgendaId, CalendarId, BillId } from "../bills/bills"
 
 export interface UpdateToken {
     id: Omit<BillId, "version" | "printNo"> | AgendaId | CalendarId
