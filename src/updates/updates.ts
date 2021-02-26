@@ -1,6 +1,8 @@
-import { AgendaId, CalendarId, BillId } from "../bills/bills"
+import { AgendaId } from "../agendas/agendas"
+import { BillId } from "../bills/bills"
+import { CalendarId } from "../calendars/calendars"
 
-export interface UpdateToken {
+interface UpdateToken {
     id: Omit<BillId, "version" | "printNo"> | AgendaId | CalendarId
     contentType: UpdateContentType
     sourceId: string
@@ -8,14 +10,14 @@ export interface UpdateToken {
     processedDateTime: Date
 }
 
-export interface Update extends UpdateToken {
+interface Update extends UpdateToken {
     action: UpdateAction
     scope: UpdateScope
     fields: {}
     fieldCount: number
 }
 
-export type BillScopes =
+type BillScopes =
     | "Bill"
     | "Bill Amendment"
     | "Bill Amendment Action"
@@ -29,19 +31,19 @@ export type BillScopes =
     | "Bill Sponsor"
     | "Bill Veto"
 
-export type CalendarScopes =
+type CalendarScopes =
     | "Calendar"
     | "Calendar Active List"
     | "Calendar Supplemental"
 
-export type AgendaScopes =
+type AgendaScopes =
     | "Agenda"
     | "Agenda Info Addendum"
     | "Agenda Info Committee"
     | "Agenda Vote Adendum"
     | "Agenda Vote Committee"
 
-export type LawScopes = "Law Tree"
-export type UpdateScope = BillScopes & CalendarScopes & AgendaScopes & LawScopes
-export type UpdateAction = "Insert" | "Update" | "Delete"
-export type UpdateContentType = "AGENDA" | "BILL" | "CALENDAR" | "LAW"
+type LawScopes = "Law Tree"
+type UpdateScope = BillScopes & CalendarScopes & AgendaScopes & LawScopes
+type UpdateAction = "Insert" | "Update" | "Delete"
+type UpdateContentType = "AGENDA" | "BILL" | "CALENDAR" | "LAW"

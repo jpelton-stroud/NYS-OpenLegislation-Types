@@ -1,9 +1,9 @@
 export interface Items<T> {
-    <T>(items: T): T | T[]
+    items: T
     size: number
 }
 
-export type ChamberType = "SENATE" | "ASSEMBLY"
+export type Chamber = "SENATE" | "ASSEMBLY"
 export type BillVersion =
     | ""
     | "A"
