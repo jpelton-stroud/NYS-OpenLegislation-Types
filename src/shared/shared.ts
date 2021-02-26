@@ -3,6 +3,12 @@ export interface Items<T> {
     size: number
 }
 
+export function isItemsList(
+    arg: unknown | Items<unknown>
+): arg is Items<unknown> {
+    return (arg as Items<unknown>).size !== undefined
+}
+
 export type Chamber = "SENATE" | "ASSEMBLY"
 export type BillVersion =
     | ""
