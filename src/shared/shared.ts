@@ -1,9 +1,15 @@
 export interface Items<T> {
-    <T>(items: T): T | T[]
+    items: T
     size: number
 }
 
-export type ChamberType = "SENATE" | "ASSEMBLY"
+export function isItemsList(
+    arg: unknown | Items<unknown>
+): arg is Items<unknown> {
+    return (arg as Items<unknown>).size !== undefined
+}
+
+export type Chamber = "SENATE" | "ASSEMBLY"
 export type BillVersion =
     | ""
     | "A"

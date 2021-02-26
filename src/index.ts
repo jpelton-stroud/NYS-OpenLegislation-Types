@@ -1,4 +1,1 @@
-export * from "./models/responses"
-export * from "./models/bills"
-export * from "./models/members"
-export * from "./models/updates"
+export { Bill } from "./bills/bills"

@@ -1,3 +1,5 @@
+import { Items } from "../shared/shared"
+
 export interface ResponseBase {
     success: boolean
     message: string
@@ -8,15 +10,12 @@ export interface ErrorResponse extends ResponseBase {
     errorCode: number
 }
 
-export interface Response extends ResponseBase {
-    <T>(result: T): T
+export interface Response<T> extends ResponseBase {
+    result: T
 }
 
-export interface ListResponse extends Response {
-    result: {
-        <T>(items: T): T[]
-        size: number
-    }
+export interface ListResponse<T> extends ResponseBase {
+    result: Items<T[]>
     total: number
     offsetStart: number
     offsetEnd: number
