@@ -4,9 +4,9 @@ export interface Items<T> {
 }
 
 export function isItemsList(
-    arg: unknown | Items<unknown>
-): arg is Items<unknown> {
-    return (arg as Items<unknown>).size !== undefined
+    arg: Items<unknown> | Items<unknown[]>
+): arg is Items<unknown[]> {
+    return (arg as Items<unknown[]>).items.length !== undefined
 }
 
 export type Chamber = "SENATE" | "ASSEMBLY"
