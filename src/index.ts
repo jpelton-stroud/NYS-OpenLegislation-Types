@@ -7,23 +7,37 @@ interface Params {
   [key: string]: string;
 }
 
-export function getBill(
-  printNo: string,
-  args: Params
-): Promise<Response<Bill>> {
+export function getBill(printNo: string, args: Params): Promise<Bill> {
   req.pathname = "api/3/bills/" + printNo.split("-").reverse().join("/");
   req.search = "";
   for (let key in args) req.searchParams.append(key, args[key]);
 
-  return fetch(req).then((res) => res.json());
+  return fetch(req)
+    .then((res) => res.json())
+    .then((data: Response<Bill>) => {
+      if (data.success) return data.result;
+      else throw new Error(data.message);
+    });
 }
+
+// (async () => {
+//   try {
+//     console.log(
+//       await getBill("S11-2021", {
+//         key: TESTKEY,
+//       })
+//     );
+//   } catch (error) {
+//     console.error(error);
+//   }
+// })();
 
 export function getBillUpdates(
   printNo: string,
   args: Params,
   since = new Date(0).toJSON(),
   until = new Date().toJSON()
-): Promise<Response<BillUpdate[]>> {
+) {
   req.pathname =
     "api/3/bills/" +
     printNo.split("-").reverse().join("/") +
@@ -31,17 +45,51 @@ export function getBillUpdates(
   req.search = "";
   for (let key in args) req.searchParams.append(key, args[key]);
 
-  return fetch(req).then((res) => res.json());
+  return fetch(req)
+    .then((res) => res.json())
+    .then((data: Response<Items<BillUpdate[]>>) => {
+      if (data.success) return data.result.items;
+      else throw new Error(data.message);
+    });
 }
 
-export function getMembers(args: Params): Promise<Response<Member[]>> {
+// (async () => {
+//   try {
+//     console.log(
+//       await getBillUpdates("S11-2021", {
+//         key: TESTKEY,
+//       })
+//     );
+//   } catch (error) {
+//     console.error(error);
+//   }
+// })();
+
+export function getCurrentMembers(args: Params) {
   req.pathname = "api/3/members/" + new Date().getFullYear();
   req.search = "";
 
   for (let key in args) req.searchParams.append(key, args[key]);
 
-  return fetch(req).then((res) => res.json());
+  return fetch(req)
+    .then((res) => res.json())
+    .then((data: Response<Items<Member[]>>) => {
+      if (data.success) return data.result.items;
+      else throw new Error(data.message);
+    });
 }
+
+// (async () => {
+//   try {
+//     console.log(
+//       await getMembers({
+//         key: TESTKEY,
+//       })
+//     );
+//   } catch (error) {
+//     console.error(error);
+//   }
+// })();
 
 interface ResponseBase {
   success: boolean;
@@ -98,4 +146,3 @@ interface SessionMemberMapItem {
   alternate: boolean;
   memberId: number;
 }
-
